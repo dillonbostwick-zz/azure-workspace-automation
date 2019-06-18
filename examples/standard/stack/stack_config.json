@@ -1,0 +1,32 @@
+{
+  "name": "example-stack",
+  "resources": [
+    {
+      "id": "example-workspace-notebook",
+      "service": "workspace",
+      "properties": {
+        "source_path": "../examples/standard/stack/notebooks/common/notebook.scala",
+        "path": "/dev/notebook",
+        "object_type": "NOTEBOOK"
+      }
+    },
+    {
+      "id": "example-workspace-config-dir",
+      "service": "workspace",
+      "properties": {
+        "source_path": "../examples/standard/stack/notebooks/config",
+        "path": "/dev/config",
+        "object_type": "DIRECTORY"
+      }
+    },
+    {
+      "id": "example-dbfs-library",
+      "service": "dbfs",
+      "properties": {
+        "source_path": "../examples/standard/stack/lib/library.jar",
+        "path": "dbfs:/tmp/lib/library.jar",
+        "is_dir": false
+      }
+    }
+  ]
+}

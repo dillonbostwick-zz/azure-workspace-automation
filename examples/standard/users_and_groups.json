@@ -1,0 +1,12 @@
+{
+	"users": [{
+		"name":"testuser1@test.com",
+		"entitlements": ["allow-cluster-create"]
+
+	}],
+	"groups": [{
+		"name": "testgroup1",
+		"entitlements": ["allow-cluster-create"],
+		"members": ["testuser1@test.com"]
+	}]
+}
