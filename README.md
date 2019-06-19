@@ -14,9 +14,11 @@ This source code is meant to be an example of scripts that you may use as inspir
 
 ### Installation
 
-Start by installing dependencies. Note that you must specify a chromedriver version that aligns with your version of Chrome (note that if you are not using Chrome you will have to manually install an alternate browser driver via Selenium)
+1) Install dependencies.
 
-`pip install . --chromedriver-version=75`
+`pip install .`
+
+2) Install chromedriver [here](http://chromedriver.chromium.org/downloads) and add it to your PATH. Note that you must install a driver version that aligns with your current Chrome installation. If you are unable to use Chrome, you must download an alternate headless brwoser driver via Selenium.
 
 ### Set up your service principle
 
@@ -40,8 +42,7 @@ First, open `./examples/standard/params.json` with your preferred text editor an
 
 Next, run the following:
 ```
-cd src
-python main.py ../examples/standard/params.json
+python src/main.py /examples/standard/params.json
 ```
 
 ## Parameters guide:

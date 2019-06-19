@@ -15,7 +15,6 @@ PARAM_DEFAULTS = {
 	'tenant_id': os.environ.get('AZURE_TENANT_ID'),
 	'tenant_name': None,
 	'stack_config_path': None,
-	'cluster_config_path': None,
 	'users_groups_path': None,
 	'api_version': '2018-04-01'
 }
@@ -41,7 +40,7 @@ def sanitize_input_params(input_params):
 			continue
 
 		if PARAM_DEFAULTS[k] is None:
-			raise k + ' is a required parameter'
+			raise ValueError('{} is a required parameter'.format(k))
 		else:
 			sanitized_params[k] = PARAM_DEFAULTS[k]
 			log.warn('Value for {} was not found. Defaulting to {}'.format(k, PARAM_DEFAULTS[k]))
