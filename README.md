@@ -25,7 +25,7 @@ This source code is meant to be an example of scripts that you may use as inspir
 There are a few prerequisite setups you must take in your Azure portal, that are not automated:
 
 #### Set up an app for AAD token exchange
-Follow the steps to create an app in this Google Doc: https://docs.google.com/document/d/11EUHoUpFAcnsStCktLlzapZO_zhqWAI--JZ95JlGOa4/edit#heading=h.2xebghg73fcd
+Please contact sales@databricks.com for information on how to configure your AAD service principle for AAD based token authentication, a feature in private preview.
 
 ## Quick Start:
 
