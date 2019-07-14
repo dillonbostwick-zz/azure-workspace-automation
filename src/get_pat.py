@@ -19,12 +19,11 @@ TEMPLATE_AUTHZ_URL = ('https://login.windows.net/{}/oauth2/authorize?' +
 DB_RESOURCE_ID = '/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Databricks/workspaces/{}'
 
 CREATE_TOKEN_ENDPOINT = '/api/2.0/token/create'
-DRIVER_EXE_PATH = './chromedriver' # TODO - package as PyPI artifact?
 REDIRECT_URI = 'http://localhost'
 
 def get_authorization_code(tenant_id, client_id, redirect_uri, authorization_url, auth_state):
 	# open browser
-	dr = webdriver.Chrome(executable_path=DRIVER_EXE_PATH)
+	dr = webdriver.Chrome()
 	# load user login page
 	dr.get(authorization_url)
 	# wait until the user login or kill the process
