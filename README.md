@@ -42,8 +42,14 @@ First, open `./examples/standard/params.json` with your preferred text editor an
 
 Next, run the following:
 ```
-python src/main.py /examples/standard/params.json
+python src/main.py ./examples/standard/params.json
 ```
+
+Please note that this will invoke Chromer browser (headless chromedriver) that you have configured as part of prerequisites. When the browser comes up, please enter your Azure AD credentials, at present the workflow is divided into 2 distinct phases
+
+1) Using Azure [ResourceManagementClient](https://pypi.org/project/azure-mgmt-resource/) (utilizes azure service principal) provision databricks workspace
+2) Using Azure [ADAL](https://github.com/AzureAD/azure-activedirectory-library-for-python), this is an interactive method to obtain an AAD access token. A browser window (chromedriver) is launched, asking users to log in, this generates AAD token which will be then used (programatically) to generate azure databricks platform [token](https://docs.azuredatabricks.net/api/latest/authentication.html#generate-a-token) which can help us invoke databricks [API's](https://docs.azuredatabricks.net/api/latest/index.html)
+ 
 
 ## Parameters guide:
 
