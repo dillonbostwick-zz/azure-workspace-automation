@@ -86,7 +86,9 @@ def initialize_databricks_workspace(aad_token, mgmt_token,params):
 		print('Failed to initialize databricks workspace - Reason: \n\n', res.content, '\n\n')
 		return
 
-
+'''
+invoked in main.py
+'''
 def create_and_initialize_databricks_workspace(params):
 	aad_token = adb_authenticate_client_key(params).token['access_token']
 	mgmt_token = adb_authorization_client_key(params).token['access_token']
