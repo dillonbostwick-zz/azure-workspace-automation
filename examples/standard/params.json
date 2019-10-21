@@ -12,5 +12,6 @@
         "tenant_name": "myaadtenant.onmicrosoft.com",
         "stack_config_path": "../examples/standard/stack/stack_config.json",
         "users_groups_path": "../examples/standard/users_and_groups.json",
-        "log_level": "info"
+        "log_level": "info",
+        "databricks_resource_id": '2ff814a6-3304-4ab8-85cb-cd0e6f879c1d'
 }
