@@ -12,7 +12,9 @@ import logging
 log = logging.getLogger()
 
 AUTHORITY_HOST_URL = 'https://login.microsoftonline.com/'
+MANAGEMENT_HOST_URL = 'https://management.core.windows.net/'
 DATABRICKS_RESOURCE_ID = '2ff814a6-3304-4ab8-85cb-cd0e6f879c1d'
+
 
 # TEMPLATE_AUTHZ_URL = ('https://login.windows.net/{}/oauth2/authorize?' +
 # 		 'response_type=code&client_id={}&redirect_uri={}&' +
@@ -30,7 +32,7 @@ def get_adb_authentication_client_key(params):
 	"""
     Authenticate using service principal w/ key.
     """
-	authority_host_uri = 'https://login.microsoftonline.com'
+	authority_host_uri = AUTHORITY_HOST_URL
 	tenant = params['tenant_id']
 	authority_uri = authority_host_uri + '/' + tenant
 	resource_uri = DATABRICKS_RESOURCE_ID
@@ -55,10 +57,10 @@ def get_adb_authorization_client_key(params):
 	"""
     Authenticate using service principal w/ key.
     """
-	authority_host_uri = 'https://login.microsoftonline.com'
+	authority_host_uri = AUTHORITY_HOST_URL
 	tenant = params['tenant_id']
 	authority_uri = authority_host_uri + '/' + tenant
-	resource_uri = 'https://management.core.windows.net/'
+	resource_uri = MANAGEMENT_HOST_URL
 	client_id = params['client_id']
 	client_secret = params['client_secret']
 	context = adal.AuthenticationContext(authority_uri, api_version=None)
