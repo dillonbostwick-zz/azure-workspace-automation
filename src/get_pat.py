@@ -2,11 +2,6 @@
 # then use it to retrieve a pat (cli
 # may not support aad token so a pat is required)
 
-# from adal import AuthenticationContext
-# from selenium import webdriver
-# from urllib.parse import urlparse, parse_qs
-# from requests.exceptions import HTTPError
-# import time, uuid, requests, json, logging
 
 from msrestazure.azure_active_directory import AADTokenCredentials
 from requests.exceptions import HTTPError
