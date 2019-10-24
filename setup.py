@@ -14,6 +14,7 @@ setup(name='Distutils',
       	'requests',
       	'databricks-cli',
       	'adal',
-      	'selenium'
+      	'selenium',
+        'msrestazure'
       ],
 )

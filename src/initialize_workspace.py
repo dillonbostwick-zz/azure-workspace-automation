@@ -1,41 +1,24 @@
-# Get personal access token by first retrieving AAD token via ADAL
-# then use it to retrieve a pat (cli
-# may not support aad token so a pat is required)
-
-
-from msrestazure.azure_active_directory import AADTokenCredentials
-from requests.exceptions import HTTPError
 import json,adal,requests
+from requests.exceptions import HTTPError
 import logging
 
+from msrestazure.azure_active_directory import AADTokenCredentials
 
 log = logging.getLogger()
 
-AUTHORITY_HOST_URL = 'https://login.microsoftonline.com/'
-MANAGEMENT_HOST_URL = 'https://management.core.windows.net/'
-DATABRICKS_RESOURCE_ID = '2ff814a6-3304-4ab8-85cb-cd0e6f879c1d'
-
-
-# TEMPLATE_AUTHZ_URL = ('https://login.windows.net/{}/oauth2/authorize?' +
-# 		 'response_type=code&client_id={}&redirect_uri={}&' +
-# 		 'state={}&resource={}')
-
 DB_RESOURCE_ID = '/subscriptions/{}/resourceGroups/{}/providers/Microsoft.Databricks/workspaces/{}'
-
 LIST_NODE_TYPES_ENDPOINT = '/api/2.0/clusters/list-node-types'
-CREATE_TOKEN_ENDPOINT = '/api/2.0/token/create'
-REDIRECT_URI = 'http://localhost'
 
+# AAD access token is to authentication what management token is to authorization.
 
-
-def get_adb_authentication_client_key(params):
+def adb_authenticate_client_key(params):
 	"""
     Authenticate using service principal w/ key.
     """
-	authority_host_uri = AUTHORITY_HOST_URL
+	authority_host_uri = 'https://login.microsoftonline.com'
 	tenant = params['tenant_id']
 	authority_uri = authority_host_uri + '/' + tenant
-	resource_uri = DATABRICKS_RESOURCE_ID
+	resource_uri = params['databricks_resource_id']
 	client_id = params['client_id']
 	client_secret = params['client_secret']
 	context = adal.AuthenticationContext(authority_uri, api_version=None)
@@ -53,14 +36,14 @@ but using the management token we are able to query AAD for the role of the user
 '''
 
 
-def get_adb_authorization_client_key(params):
+def adb_authorization_client_key(params):
 	"""
     Authenticate using service principal w/ key.
     """
-	authority_host_uri = AUTHORITY_HOST_URL
+	authority_host_uri = 'https://login.microsoftonline.com'
 	tenant = params['tenant_id']
 	authority_uri = authority_host_uri + '/' + tenant
-	resource_uri = MANAGEMENT_HOST_URL
+	resource_uri = 'https://management.core.windows.net/'
 	client_id = params['client_id']
 	client_secret = params['client_secret']
 	context = adal.AuthenticationContext(authority_uri, api_version=None)
@@ -103,50 +86,10 @@ def initialize_databricks_workspace(aad_token, mgmt_token,params):
 		print('Failed to initialize databricks workspace - Reason: \n\n', res.content, '\n\n')
 		return
 
-
-def pat_from_aad_token(aad_token,mgmt_token,params):
-	location = params['location']
-	db_host = 'https://'+location+'.azuredatabricks.net'
-	subscription_id = params['subscription_id']
-	rg_name = params['rg_name']
-	workspace_name = params['workspace_name']
-	log.debug('aad: {}'.format(aad_token))
-	log.debug('mgmt: {}'.format(mgmt_token))
-
-	uri = db_host + CREATE_TOKEN_ENDPOINT
-	db_resource_id = DB_RESOURCE_ID.format(subscription_id, rg_name, workspace_name)
-	log.info('Using Databricks resource id: '.format(db_resource_id))
-	log.info('Using host: {}'.format(uri))
-	headers = {
-		'Authorization': 'Bearer ' + aad_token,
-		'X-Databricks-Azure-Workspace-Resource-Id': db_resource_id,
-		'X-Databricks-Azure-SP-Management-Token': mgmt_token
-	}
-
-	log.info("Exchanging AAD token for PAT for further provisioning")
-	res = requests.post(uri, headers=headers)
-
-	try:
-		res.raise_for_status()
-	except HTTPError:
-		print('Failed to generate databricks platform access token - Reason: \n\n', res.content, '\n\n')
-		return
-
-	log.debug('Full response from PAT request: {}'.format(res))
- 	log.debug('Content: {}'.format(res.content))
- 	return json.loads(res.content)['token_value']
-
-
-def run(params):
-	log.info('generating AAD authentication token')
-	aad_token = get_adb_authentication_client_key(params).token['access_token']
-	log.info('generating AAD management authorization token')
-	mgmt_token = get_adb_authorization_client_key(params).token['access_token']
-	log.info('AAD Management Token: '.format(mgmt_token))
-	initialize_databricks_workspace(aad_token, mgmt_token, params)
-	log.info('Initializing databricks workspace')
-	# Exchange AAD token for PAT (for use with CLI lib) via Token API
-	pat = pat_from_aad_token(aad_token, params['db_host'], params['subscription_id'], params['rg_name'],
-							 params['workspace_name'])
-	log.info('Exchanged for PAT: '.format(pat))
-	return pat
+'''
+invoked in main.py
+'''
+def create_and_initialize_databricks_workspace(params):
+	aad_token = adb_authenticate_client_key(params).token['access_token']
+	mgmt_token = adb_authorization_client_key(params).token['access_token']
+	initialize_databricks_workspace(aad_token,mgmt_token,params)
