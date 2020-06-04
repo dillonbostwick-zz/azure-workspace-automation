@@ -80,20 +80,6 @@
             "defaultValue": "[bool('false')]",
             "type": "bool"
         },
-        "departmentName": {
-            "type": "string",
-            "defaultValue": "Marketing",
-            "metadata": {
-                "description": "Department Tag"
-            }
-        },
-        "applicationName": {
-            "type": "string",
-            "defaultValue": "BI&Analytics",
-            "metadata": {
-                "description": "Application Tag"
-            }
-        },
         "createdBy": {
             "type": "string",
             "defaultValue": "databricks-automation",

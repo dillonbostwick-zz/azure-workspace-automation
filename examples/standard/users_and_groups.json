@@ -1,12 +1,26 @@
 {
-	"users": [{
-		"name":"testuser1@test.com",
-		"entitlements": ["allow-cluster-create"]
-
-	}],
-	"groups": [{
-		"name": "testgroup1",
-		"entitlements": ["allow-cluster-create"],
-		"members": ["testuser1@test.com"]
-	}]
+  "users": [
+    {
+      "name": "testuser65@test.com",
+	  "entitlements": ["allow-cluster-create"],
+	  "groups":["testgroup65"]
+    },
+    {
+      "name": "testuser66@test.com",
+      "entitlements": ["allow-cluster-create","allow-instance-pool-create"],
+	  "groups":["testgroup65","testgroup66"]
+    }
+  ],
+  "groups": [
+    {
+      "name": "testgroup65",
+      "entitlements": ["allow-cluster-create"],
+      "members": ["testuser65@test.com"]
+	},
+	{
+		"name": "testgroup66",
+		"entitlements": ["allow-cluster-create","allow-instance-pool-create"],
+		"members": ["testuser65@test.com","testuser66@test.com"]
+	  }
+  ]
 }
