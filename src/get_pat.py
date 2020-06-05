@@ -7,7 +7,7 @@ from msrestazure.azure_active_directory import AADTokenCredentials
 from requests.exceptions import HTTPError
 import json,adal,requests
 import logging
-from src.get_aad_tokens import get_adb_authentication_client_key
+from src.get_aad_token import get_adb_authentication_client_key
 
 log = logging.getLogger()
 

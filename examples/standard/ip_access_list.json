@@ -1,0 +1,26 @@
+{
+  "blacklist": [
+    {
+      "label": "cafe",
+      "list_type": "BLACKLIST",
+      "ip_addresses": ["1.1.*.*/16","2.2.2.2/32"]
+    },
+    {
+      "label": "airport-wifi",
+      "list_type": "BLACKLIST",
+      "ip_addresses": ["3.3.3.3","22.22.22.22/32"]
+    }
+  ],
+  "whitelist": [
+    {
+      "label": "corp-vpn1",
+      "list_type": "WHITELIST",
+      "ip_addresses": ["0.0.0.0"]
+    },
+	{
+      "label": "corp-express-route",
+      "list_type": "WHITELIST",
+      "ip_addresses": ["172.1.1.1/32"]
+    }
+  ]
+}

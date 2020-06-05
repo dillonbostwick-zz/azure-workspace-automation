@@ -3,12 +3,12 @@ from azure.mgmt.resource import ResourceManagementClient
 from azure.common.credentials import ServicePrincipalCredentials
 from azure.mgmt.resource.resources.models import Deployment, DeploymentMode, TemplateLink
 import requests, json, logging
-from src.get_aad_tokens import get_adb_authorization_client_key
+from src.get_aad_token import get_adb_authorization_client_key
 from requests.exceptions import HTTPError
 
 BASIC_TEMPLATE_URI = 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-databricks-workspace/azuredeploy.json'
 CUSTOM_CIDR_TEMPLATE_URI = 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-databricks-workspace-with-custom-vnet-address/azuredeploy.json'
-ALL_IN_ONE = 'https://raw.githubusercontent.com/bhavink/azure-workspace-automation/master/examples/standard/all-in-one-with-tags.json'
+ALL_IN_ONE = 'https://raw.githubusercontent.com/bhavink/azure-workspace-automation/master/examples/standard/vnet_injection_arm_template.json'
 log = logging.getLogger()
 
 def run(params):

@@ -1,6 +1,6 @@
 
 import os, sys, logging, json
-from src import create_deployment,get_aad_tokens, get_pat, scim_provision_direct #, deploy_stack_to_workspace
+from src import create_deployment,get_aad_token, get_pat, scim_provision_direct #, deploy_stack_to_workspace
 
 PARAM_DEFAULTS = {
 	'location': 'eastus',
