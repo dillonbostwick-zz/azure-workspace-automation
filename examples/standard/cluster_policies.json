@@ -1,0 +1,16 @@
+{
+  "cluster-policies": [
+    {
+      "name": "small",
+      "definition": "{\"spark_version\": {\"type\": \"regex\",\"pattern\": \"6.[0-9].x-scala.*\"},\"custom_tags.tag_name1\": {\"type\": \"fixed\",\"value\": \"tag_value1\"},\"autoscale.min_workers\": {\"type\": \"range\",\"minValue\": 1,\"maxValue\": 5},\"driver_node_type_id\": {\"type\": \"regex\",\"pattern\": \"Standard_[DLS]*[1-6]{1,2}_v[2,3]\"},\"node_type_id\": {\"type\": \"regex\",\"pattern\": \"Standard_[DLS]*[1-6]{1,2}_v[2,3]\"},\"autotermination_minutes\": {\"type\": \"fixed\",\"value\": 60},\"autoscale.max_workers\": {\"type\": \"range\",\"minValue\": 2,\"maxValue\": 20}}",
+      "entitlements": ["CAN_USE"],
+	  "groups":["testgroup65"]
+    },
+    {
+      "name": "medium",
+      "definition": "{\"spark_version\": {\"type\": \"regex\",\"pattern\": \"6.[0-9].x-scala.*\"},\"custom_tags.tag_name1\": {\"type\": \"fixed\",\"value\": \"tag_value1\"},\"autoscale.min_workers\": {\"type\": \"range\",\"minValue\": 1,\"maxValue\": 5},\"driver_node_type_id\": {\"type\": \"regex\",\"pattern\": \"Standard_[DLS]*[1-6]{1,2}_v[2,3]\"},\"node_type_id\": {\"type\": \"regex\",\"pattern\": \"Standard_[DLS]*[1-6]{1,2}_v[2,3]\"},\"autotermination_minutes\": {\"type\": \"fixed\",\"value\": 60},\"autoscale.max_workers\": {\"type\": \"range\",\"minValue\": 2,\"maxValue\": 20}}",
+      "entitlements": ["CAN_USE"],
+	  "groups":["testgroup66"]
+    }
+  ]
+}

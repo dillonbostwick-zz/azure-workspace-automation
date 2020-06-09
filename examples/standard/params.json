@@ -20,6 +20,6 @@
 		"created_by": "databricks",
         "stack_config_path": "./examples/standard/stack/stack_config.json",
         "users_groups_path": "./examples/standard/users_and_groups.json",
-		"ip_access_list_path": "./examples/standard/ip_access_list.json",
+		"ip_access_list_path": "../examples/standard/ip_access_list.json",
         "log_level": "info"
 }
