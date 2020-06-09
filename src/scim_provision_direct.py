@@ -97,47 +97,6 @@ def add_users(users, users_uri, headers):
 		else:
 			log.info('Added user: ' + user['name'])
 
-# def apply_group_memberships(users, groups, users_uri, groups_uri, headers):
-# 	# Get lists of all existing users and groups:
-
-# 	try:
-# 		log.info('Retrieving list of users')
-# 		all_users_res_raw = requests.get(users_uri, headers=headers)
-# 		all_users = json.loads(all_users_res_raw.text)['Resources']
-# 		print(all_users)
-# 	except Exception as err:
-# 		log.error('Failed to get list of users id lookups. Unable to link users to groups - Reason: \n\n{}\n\n'.format(err))
-# 		return 1
-
-# 	# Apply group memberships
-# 	for group in groups:
-# 		log.info('Adding memberships to group ' + group['name'])
-
-# 		member_ids = [get_user_id(member, all_users) for member in group['members']]
-# 		log.info("member_ids")
-# 		group_id = '7323671097949009' #group_dict[group['name']]
-# 		log.info(group_id)
-# 		log.info(groups_uri+'/'+group_id)
-
-		# res = requests.patch(groups_uri+'/'+group_id, headers=headers, json={
-		# 	'schemas': [
-		# 		GROUP_OP_SCHEMA
-		# 	],
-		# 	'Operations':[{
-		# 		'op':'add',
-		# 		'value':{
-		# 			'members': [{'value': member_id} for member_id in member_ids]
-		# 		}
-		# 	}]
-		# })
-
-		# try:
-		# 	res.raise_for_status()
-		# except HTTPError:
-		# 	log.error('Failed to add all memberships for group' + group['name'] + ' - Reason: \n\n{}\n\n'.format(res.content))
-		# else:
-		# 	log.info('Added memberships for group: {}'.format(group['name']))
-
 
 def run(params):
 	headers = {
@@ -159,4 +118,3 @@ def run(params):
 		add_groups(groups, groups_uri, headers)
 		apply_group_entitlements(groups, groups_uri, headers)
 		add_users(users, users_uri, headers)
-		# apply_group_memberships(users, groups, users_uri, groups_uri, headers)

@@ -9,12 +9,6 @@ resp_dict_whitelist = {}
 resp_dict_blacklist = {}
 
 
-# patch - https://{{workspaceUrl}}/api/2.0/preview/workspace-conf
-# get - https://{{workspaceUrl}}/api/2.0/preview/workspace-conf?keys=enableIpAccessLists
-# white post - https://{{workspaceUrl}}/api/2.0/preview/ip-access-lists
-# black post - https://{{workspaceUrl}}/api/2.0/preview/ip-access-lists
-
-
 IP_ACCESS_LIST_ENDPOINT = '/api/2.0/preview/ip-access-lists'
 WORKSPACE_CONF_ENDPOINT = '/api/2.0/preview/workspace-conf'
 
