@@ -159,8 +159,6 @@
             "location": "[parameters('location')]",
             "name": "[parameters('workspaceName')]",
             "tags": {
-                "Department": "[parameters('departmentName')]",
-                "Application": "[parameters('applicationName')]",
                 "Created By": "[parameters('createdBy')]"
             },
             "dependsOn": [
