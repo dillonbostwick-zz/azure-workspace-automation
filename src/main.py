@@ -1,22 +1,32 @@
 
 import os, sys, logging, json
-import create_deployment, scim_provision_direct, deploy_stack_to_workspace, get_pat
+from src import create_deployment,get_aad_token, get_pat, scim_provision_direct, ip_access_control #, deploy_stack_to_workspace
 
 PARAM_DEFAULTS = {
 	'location': 'eastus',
 	'rg_name': None,
 	'deployment_name': None,
 	'workspace_name': None,
-	'pricing_tier': 'standard',
-	'vnet_address_prefix': '',
-	'subscription_id': '',
+	'pricing_tier': 'premium',
+	'subscription_id': os.environ.get('AZURE_SUBSCRIPTION_ID'),
 	'client_id': os.environ.get('AZURE_CLIENT_ID'),
 	'client_secret': os.environ.get('AZURE_CLIENT_SECRET'),
 	'tenant_id': os.environ.get('AZURE_TENANT_ID'),
+	'databricks_resource_id':None,
 	'tenant_name': None,
 	'stack_config_path': None,
 	'users_groups_path': None,
-	'api_version': '2018-04-01'
+	'ip_access_list_path':None,
+	'api_version': '2018-04-01',
+	'nsg_name': None,
+	'vnet_name':None,
+	'private_subnet_name': None,
+	'public_subnet_name': None,
+	'vnet_cidr':None,
+	'private_subnet_cidr':None,
+	'public_subnet_cidr':None,
+	'enable_npip':False,
+	'created_by':None
 }
 SUCCESS_STATE = 'SUCCESS'
 
@@ -51,18 +61,24 @@ def run_deployment_all(params):
 	log.info('Beginning deploying with params: ', params)
 
 	# workspace hostname returned from create deployment
-	params['db_host'] = create_deployment.run(params)
-	log.info('create_deployment completed with host: {}'.format(params['db_host']))
+	# params['db_host'] = create_deployment.run(params)
+	# log.info('create_deployment completed with host: {}'.format(params['db_host']))
+	#
+	# params['db_pat'] = get_pat.run(params)
+	# log.info('get_pat completed with pat: {}'.format(params['db_pat']))
+	#
+	# scim_provision_direct.run(params)
+	# log.info('scim_provision completed')
 
-	params['db_pat'] = get_pat.run(params)
-	log.info('get_pat completed with pat: {}'.format(params['db_pat']))
+	#
+	# deploy_stack_to_workspace.run(params)
+	# log.info('deploy_stack_to_workspace completed')
 
-	scim_provision_direct.run(params)
-	log.info('scim_provision completed')
 
-	deploy_stack_to_workspace.run(params)
-	log.info('deploy_stack_to_workspace completed')
+	params['db_host'] = 'https://adb-2823806815155449.9.azuredatabricks.net'
+	params['db_pat']='dapi790d26ce04d6a8e601ea307a2d2f5e12'
 
+	ip_access_control.run(params)
 	params['autodeploy_state'] = SUCCESS_STATE
 	return params
 

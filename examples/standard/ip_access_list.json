@@ -1,0 +1,16 @@
+{
+  "blacklist": [
+    {
+      "label": "public-cafe1",
+      "list_type": "BLACKLIST",
+      "ip_addresses": ["1.1.1.1/16","2.2.2.2/32"]
+    }
+  ],
+  "whitelist": [
+    {
+      "label": "corp-vpn9",
+      "list_type": "WHITELIST",
+      "ip_addresses": ["0.0.0.0/0","172.1.1.1/32"]
+    }
+  ]
+}
